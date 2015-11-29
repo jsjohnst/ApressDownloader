@@ -1,22 +1,16 @@
 #!/usr/bin/env python
-""" Downloads products from Apress """
+""" Downloads eBooks from Apress """
 import requests
-import signal
-import sys
 import os
 import re
-import argparse
-import getpass
-import pprint
 import bs4
 import HTMLParser
 import logging
-import colorlog
 
 VERSION = 1.0
 
 class ApressDownloader(object):
-    """ Handles downloading products you own from Apress.com """
+    """ Handles downloading eBooks you own from Apress.com """
 
     def __init__(self, overwrite=False, parser='html.parser'):
         self.request = requests.Session()
@@ -236,4 +230,11 @@ def main():
 
 
 if __name__ == '__main__':
+    import argparse
+    import getpass
+    import pprint
+    import signal
+    import colorlog
+    import sys
+
     main()
