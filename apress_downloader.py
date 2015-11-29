@@ -35,10 +35,14 @@ class ApressDownloader(object):
 
         return writes
 
-    def download_product(self, product, path="ebooks"):
+    def download_product(self, product, path="./ebooks"):
         """ Downloads the given product """
         name = re.sub(r'[^-a-zA-Z0-9_+()\[\]]+', '_',
                       product.get('title').encode('ascii', 'ignore').strip())
+
+        if not os.path.isdir(path):
+            self.logger.error("Path does not exist: %s", path)
+            return
 
         try:
             os.mkdir(path + '/' + name)
@@ -74,7 +78,7 @@ class ApressDownloader(object):
             return True
         else:
             self.logger.error("Failed to authenticate with Apress.com, redirected to: %s", response.url)
-            return True
+            return False
 
 
     def fetch_products(self, limit=50):
